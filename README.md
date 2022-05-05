@@ -1,10 +1,14 @@
 # DROP TABLES, REACT-BASED QUESTIONNAIRE PROJECT (USER SIDE). LOGIN/ACCOUNT SYSTEM CONCENTRATION
 
-## How to contribute
+## How to contribute 
 
 - React application is continiously built and deployed from "main" branch to https://drop-tables.netlify.app/
 - Please create a feature to work on in a separate branch, then create a PR to merge it into main when done. Please make sure to test your build before merging
 
+## UIUX
+
+- Project wireframes (WIP) are available at https://www.figma.com/file/6bo2mtuE5aGG1wnltiSPkh/DROP-TABLES-(USER-SIDE)?node-id=0%3A1 
+- Material UI Design Kit is available at https://www.figma.com/file/d3B0iz72GWjlalHpnVVolL/Material-Design-UI-kit---Components-library-(Community)?node-id=0%3A13759; use UI elements from the kit to contribute to the Wireframes
 
 # BOILERPALTE:
 
