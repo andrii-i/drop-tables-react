@@ -1,4 +1,14 @@
-# Getting Started with Create React App
+# DROP TABLES, REACT-BASED QUESTIONNAIRE PROJECT (USER SIDE)
+
+## How to contribute
+
+- React application is continiously built and deployed from "main" branch to https://drop-tables.netlify.app/
+- Please create a feature to work on in a separate branch, then create a PR to merge it into main when done. Please make sure to test your build before merging
+
+
+# BOILERPALTE:
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
