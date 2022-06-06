@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useCallback, useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,11 +12,14 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { GoogleLoginButton } from 'react-social-login-buttons';
 import { useAuth } from "./contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const { signInGoogle, currentUser, signout } = useAuth();
-  const [auth, setAuth] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [auth, setAuth] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
       setAuth(event.target.checked);
@@ -30,11 +33,11 @@ export default function NavBar() {
       setAnchorEl(null);
   };
 
-  // const handleGoogle = useCallback(async (event) => {
-  //   event.preventDefault();
-  //   await signInGoogle();
-  //   navigate('/');
-  // });
+  const handleGoogle = useCallback(async (event) => {
+    event.preventDefault();
+    await signInGoogle();
+    navigate('/');
+  });
 
   return (
     <Box sx={{ flexGrow: 1}}>
@@ -93,7 +96,7 @@ export default function NavBar() {
             <div>
               <Box component='form' noValidate>
                 <GoogleLoginButton
-                  onClick={signInGoogle}
+                  onClick={handleGoogle}
                   style={{ width: 250 }}
                 />
               </Box>
