@@ -11,9 +11,10 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { GoogleLoginButton } from 'react-social-login-buttons';
+import { useAuth } from "./contexts/authContext";
 
 export default function NavBar() {
-  // const { signInGoogle, signInFacebook, currentUser } = useAuth();
+  const { signInGoogle, currentUser, signout } = useAuth();
   const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -92,7 +93,7 @@ export default function NavBar() {
             <div>
               <Box component='form' noValidate>
                 <GoogleLoginButton
-                  // onClick={handleGoogle}
+                  onClick={signInGoogle}
                   style={{ width: 250 }}
                 />
               </Box>
