@@ -3,14 +3,28 @@ import Box from '@mui/material/Box';
 import NavBar from './NavBar';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
+import List from '@mui/material/List';
+// import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import ArticleIcon from '@mui/icons-material/Article';
 
 function DisplaySurvey({survey}){
   return (
-    <div style={{color:"white"}}>
-      {survey.Description}
-    </div>
+    <List sx={{ width: '80%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
+      <ListItemButton href='/surveys/1'>
+        <ListItemAvatar>
+          <Avatar>
+            <ArticleIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={survey.Name} secondary={survey.Description} />
+      </ListItemButton>
+    </List>
   )
-}
+};
 
 export default function SurveysPage() {
   const [surveys, setSurveys] = useState()
@@ -27,7 +41,6 @@ export default function SurveysPage() {
         </Typography>
       </Box>
       {surveys && surveys.map((survey) => <DisplaySurvey survey={survey}></DisplaySurvey>)}
-   
     </Box>
   )
 }
