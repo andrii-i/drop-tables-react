@@ -8,6 +8,8 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import Button from '@mui/material/Button';
+import axios from 'axios';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -40,9 +42,14 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
+function sqlThing(){
+  axios.get("http://127.0.0.1:5000/get_user/SLawhead118@gmail.com").then((data) => console.log(data.data));
+}
+
 export default function UserLandingPage() {
   return (
     <Box className='container-center-horizontal' sx={{height: '100vh'}}>
+      <Button onClick={sqlThing}>This is button</Button>
       <NavBar />
       <Box sx={{ maxWidth: '80%', ml: 'auto', mr: 'auto', mt: 10 }}>
         <Typography variant="h5" component="div" sx={{ color: 'white', textAlign: 'left' }}>
