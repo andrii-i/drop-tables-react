@@ -14,7 +14,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 function DisplaySurvey({survey}){
   return (
     <List sx={{ width: '80%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
-      <ListItemButton>
+      <ListItemButton href='/surveys/1'>
         <ListItemAvatar>
           <Avatar>
             <ArticleIcon />

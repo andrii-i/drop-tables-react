@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import UserLandingPage from './UserLandingPage';
 import SurveysPage from './SurveysPage';
+import TakingURESurvey from './TakingURESurvey';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<PrivateRoute />} >
               <Route path="/" element={<UserLandingPage />} />
               <Route path='/surveys' element={<SurveysPage />} />
+              <Route path='/surveys/1' element={<TakingURESurvey />} />
             </Route>
             
 
