@@ -9,6 +9,7 @@ import UserLandingPage from './UserLandingPage';
 import SurveysPage from './SurveysPage';
 import TakingURESurvey from './TakingURESurvey';
 import { BrowserRouter as Router } from 'react-router-dom';
+import TakeWorkSurvey from './TakeWorkSurvey';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
               <Route path="/" element={<UserLandingPage />} />
               <Route path='/surveys' element={<SurveysPage />} />
               <Route path='/surveys/1' element={<TakingURESurvey />} />
+              <Route path='/surveys/2' element={<TakeWorkSurvey></TakeWorkSurvey>} />
+              {/* <Route path='/surveys/1' element={<TakingURESurvey />} /> */}
             </Route>
             
 

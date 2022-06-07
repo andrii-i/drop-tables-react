@@ -12,9 +12,10 @@ import Avatar from '@mui/material/Avatar';
 import ArticleIcon from '@mui/icons-material/Article';
 
 function DisplaySurvey({survey}){
+  const ref = `/surveys/${survey.SurveyID}`
   return (
     <List sx={{ width: '80%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
-      <ListItemButton href='/surveys/1'>
+      <ListItemButton href={ref}>
         <ListItemAvatar>
           <Avatar>
             <ArticleIcon />
