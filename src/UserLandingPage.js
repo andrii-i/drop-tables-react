@@ -52,7 +52,7 @@ function DisplaySurvey({survey}){
   console.log(survey);
   // const ref = `/surveys/${survey.SurveyID}`
   return (
-    <List sx={{ width: '80%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
+    <List sx={{ width: '100%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
       <ListItemButton>
         <ListItemAvatar>
           <Avatar>
