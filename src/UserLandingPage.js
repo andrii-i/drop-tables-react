@@ -9,6 +9,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import { useAuth } from "./contexts/authContext";
+import axios from 'axios';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -42,7 +43,16 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function UserLandingPage() {
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
+  const [surveysTaken, setSurveys] = useState();
+
+  useEffect(() => {
+    if(currentUser){
+      console.log("Hi there " + currentUser.multiFactor.user.email);
+      axios.get(`http://127.0.0.1:5000/get_response/${currentUser.multiFactor.user.email}`).then((data) => setSurveys(data.data));
+    }
+  }, [currentUser])
+
   return (
     <Box className='container-center-horizontal' sx={{height: '100vh'}}>
       <NavBar />
@@ -67,6 +77,7 @@ export default function UserLandingPage() {
           <AccordionDetails>
             <Typography sx={{ color: 'white', textAlign: 'left', ml: 4 }}>
               This is where the surveys the user has taken will be displayed
+              {surveysTaken && surveysTaken.map((survey) => <li>{survey.SurveyID} - {survey.Name}</li>)}
             </Typography>
           </AccordionDetails>
         </Accordion>
