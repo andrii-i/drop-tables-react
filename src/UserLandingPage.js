@@ -9,6 +9,12 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import { useAuth } from "./contexts/authContext";
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import ArticleIcon from '@mui/icons-material/Article';
 import axios from 'axios';
 
 const Accordion = styled((props) => (
@@ -41,6 +47,23 @@ const AccordionSummary = styled((props) => (
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
+
+function DisplaySurvey({survey}){
+  console.log(survey);
+  // const ref = `/surveys/${survey.SurveyID}`
+  return (
+    <List sx={{ width: '80%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
+      <ListItemButton>
+        <ListItemAvatar>
+          <Avatar>
+            <ArticleIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={survey.Name} secondary={survey.Category + ' - ' + survey.DateCompleted.split('00')[0]} sx={{ color: 'black' }} />
+      </ListItemButton>
+    </List>
+  )
+};
 
 export default function UserLandingPage() {
   const { currentUser } = useAuth();
@@ -77,7 +100,7 @@ export default function UserLandingPage() {
           <AccordionDetails>
             <Typography sx={{ color: 'white', textAlign: 'left', ml: 4 }}>
               This is where the surveys the user has taken will be displayed
-              {surveysTaken && surveysTaken.map((survey) => <li>{survey.SurveyID} - {survey.Name}</li>)}
+              {surveysTaken && surveysTaken.map((survey) => <DisplaySurvey survey={survey} />)}
             </Typography>
           </AccordionDetails>
         </Accordion>
