@@ -41,14 +41,3 @@ export function AnonLandingPage() {
     </Box>
   );
 }
-
-// function Logo() {
-//     return (
-//         <div className='logo'>
-//             <div className='drop-tables'>
-//                 DropTables
-//             </div>
-//             <img className='union-1' src='union-1.svg' alt='logo' />
-//         </div>
-//     );
-// }
