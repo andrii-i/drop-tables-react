@@ -6,11 +6,11 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { useAuth } from "./contexts/authContext";
+// import { useAuth } from "./contexts/authContext";
 
 export function AnonLandingPage() {
-  const { currentUser } = useAuth();
-  console.log(currentUser)
+  // const { currentUser } = useAuth();
+  // console.log(currentUser)
   return (
     <Box className='container-center-horizontal' sx={{height: '100vh'}}>
       <NavBar />

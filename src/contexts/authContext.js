@@ -1,6 +1,7 @@
 import React, { useContext, createContext, useState, useEffect } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth, signInWithGoogle } from '../firebase';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
@@ -32,6 +33,13 @@ export function AuthProvider({ children }){
 
     return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    console.log(currentUser);
+    if (currentUser) {
+      axios.get(`http://127.0.0.1:5000/get_user/${currentUser.multiFactor.user.email}/${currentUser.multiFactor.user.displayName}`).then((data) => console.log(data.data));
+    }
+  }, [currentUser])
 
   const value = {
     currentUser,
