@@ -5,10 +5,11 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 
 export default function SurveysPage() {
+  
 
   useEffect(() => {
     axios.get(`http://127.0.0.1:5000/get_surveys`).then((data) => console.log(data.data));
-  })
+  }, []);
 
   return (
     <Box className='container-center-horizontal' sx={{height: '100vh'}}>
