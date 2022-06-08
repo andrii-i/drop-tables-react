@@ -11,6 +11,7 @@ import TakingURESurvey from './TakingURESurvey';
 import { BrowserRouter as Router } from 'react-router-dom';
 import TakeWorkSurvey from './TakeWorkSurvey';
 import OnetJobs from './OnetJobs'
+import TakingProfileSurvey from './TakingProfileSurvey';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path='/surveys' element={<SurveysPage />} />
               <Route path='/surveys/1' element={<TakingURESurvey />} />
               <Route path='/surveys/2' element={<TakeWorkSurvey></TakeWorkSurvey>} />
+              <Route path='/profiles' element={<TakingProfileSurvey />} />
               <Route path='/onet_jobs' element={<OnetJobs></OnetJobs>} />
               {/* <Route path='/surveys/1' element={<TakingURESurvey />} /> */}
             </Route>
