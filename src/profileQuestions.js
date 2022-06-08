@@ -27,54 +27,54 @@ export function getQuestions() {
   return q;
 }
 
-export function getAnswers(SurveyID) {
+export function getAnswers(position) {
   let a = [{
-    Position: 1,
+    Position: position,
     ResponsePrompt: "Don't want to answer",
     ResponseValue: 0,
-    SurveyID: SurveyID
+    SurveyID: position
   }, 
   {
-    Position: 2,
+    Position: position,
     ResponsePrompt: "1",
     ResponseValue: 1,
-    SurveyID: SurveyID
+    SurveyID: position
   }, 
   {
-    Position: 3,
+    Position: position,
     ResponsePrompt: "2",
     ResponseValue: 2,
-    SurveyID: SurveyID
+    SurveyID: position
   }, 
   {
-    Position: 4,
+    Position: position,
     ResponsePrompt: "3",
     ResponseValue: 3,
-    SurveyID: SurveyID
+    SurveyID: position
   }, 
   {
-    Position: 5,
+    Position: position,
     ResponsePrompt: "4",
     ResponseValue: 4,
-    SurveyID: SurveyID
+    SurveyID: position
   }, 
   {
-    Position: 6,
+    Position: position,
     ResponsePrompt: "5",
     ResponseValue: 5,
-    SurveyID: SurveyID
+    SurveyID: position
   }, 
   {
-    Position: 7,
+    Position: position,
     ResponsePrompt: "6",
     ResponseValue: 6,
-    SurveyID: SurveyID
+    SurveyID: position
   }, 
   {
-    Position: 8,
+    Position: position,
     ResponsePrompt: "7",
     ResponseValue: 7,
-    SurveyID: SurveyID
+    SurveyID: position
   }];
   return a;
 }

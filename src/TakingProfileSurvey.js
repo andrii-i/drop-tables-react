@@ -53,15 +53,21 @@ export default function TakingProfileSurvey() {
   useEffect(() => {
     axios.get(`http://127.0.0.1:5000/get_response_options/${surveyId}`).then((data) => {
       let numQuestions = data.length;
-      setQuestions(getQuestions())
-      //iterate through numQuestions
-      let qOptions = [];
-      for(let i = 0; i < numQuestions; i++){
-        qOptions = [...qOptions, ...getAnswers(i+1)];
-      }
-      setOptions(qOptions);
+      setQuestions(getQuestions());
   });
   }, [])
+
+  useEffect(() => {
+    if (questions) {
+      console.log(questions);
+      let qOptions = [];
+      for(let i = 0; i < questions.length; i++){
+        qOptions = [...qOptions, ...getAnswers(i+1)];
+      }
+      console.log(qOptions);
+      setOptions(qOptions);
+    }
+  }, [questions])
 
   useEffect(() => {
     if(questions && responseOptions){
