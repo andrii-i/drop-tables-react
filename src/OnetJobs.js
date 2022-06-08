@@ -11,8 +11,9 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import ArticleIcon from '@mui/icons-material/Article';
 
-function DisplaySurvey({job}){
-  const ref = `/matches/${job.jobID}`
+function DisplayJob({job}){
+  const ref = `https://www.onetonline.org/link/summary/${job.JobID}`
+  console.log(ref);
   return (
     <List sx={{ width: '80%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
       <ListItemButton href={ref}>
@@ -21,7 +22,7 @@ function DisplaySurvey({job}){
             <ArticleIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={job.Title} secondary={job.Description} /> {job.jobID}
+        <ListItemText primary={job.Title} secondary={job.Description} /> {job.JobID}
       </ListItemButton>
     </List>
   )
@@ -41,7 +42,7 @@ export default function OnetJobs() {
           Onet Jobs
         </Typography>
       </Box>
-      {jobs && jobs.map((job) => <DisplaySurvey job={job}></DisplaySurvey>)}
+      {jobs && jobs.map((job) => <DisplayJob job={job}></DisplayJob>)}
     </Box>
   )
 }
