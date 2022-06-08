@@ -22,7 +22,7 @@ export default function TakeWorkSurvey() {
       }
     }, [questions])
     return (
-      <Box className='container-center-horizontal' sx={{height: '100vh'}}>
+      <Box className='container-center-horizontal' sx={{minHeight: '100vh'}}>
         <NavBar />
         <div style={{color: "white"}}>
           This is take Work survey
