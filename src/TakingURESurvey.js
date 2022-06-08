@@ -32,7 +32,6 @@ export default function TakingURESurvey() {
         let question = questions[i];
         let responses = responseOptions.filter((x) => x.Position == question.Position);
         if(responses.length == 0){
-          console.log(lastPosition);
           responses = responseOptions.filter((x) => x.Position == lastPosition);
         }
         else{
