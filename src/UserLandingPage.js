@@ -93,6 +93,11 @@ export default function UserLandingPage() {
             Take A Survey
           </Typography>
         </Link>
+        <Link href='/profiles' style={{ textDecoration: 'none' }}>
+          <Typography variant="h5" component="div" sx={{ color: 'white', textAlign: 'left', mt: 3 }}>
+            Create A Profile
+          </Typography>
+        </Link>
         <Accordion sx={{ background: '#141623', mt: 2, ml: -2 }} elevation={0}>
           <AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
             <Typography variant='h5' component='div' sx={{ color: 'white', flexShrink: 0 }}>
