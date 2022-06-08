@@ -12,6 +12,7 @@ import { useAuth } from "./contexts/authContext";
 import { getAnswers, getQuestions } from "./profileQuestions"
 
 function DisplayQuestionOption({questionOpt, setAnswers}){
+  console.log(questionOpt);
   const [value, setValue] = useState();
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -48,23 +49,20 @@ export default function TakingProfileSurvey() {
   const [questions, setQuestions] = useState();
   const [questionOptions, setQOptions] = useState();
   const [questionAnswers, setAnswers] = useState()
-  const surveyId = 1;
+
   // console.log(questionAnswers);
   useEffect(() => {
-    axios.get(`http://127.0.0.1:5000/get_response_options/${surveyId}`).then((data) => {
-      setQuestions(getQuestions());
-      
-  });
-  }, [])
+    setQuestions(getQuestions());
+  }, []);
 
   useEffect(() => {
     if (questions) {
-      console.log(questions);
+      // console.log(questions);
       let qOptions = [];
       for(let i = 0; i < questions.length; i++){
         qOptions = [...qOptions, ...getAnswers(i+1)];
       }
-      console.log(qOptions);
+      // console.log(qOptions);
       setOptions(qOptions);
     }
   }, [questions])
@@ -93,7 +91,7 @@ export default function TakingProfileSurvey() {
       setAnswers(Array(numQuestions).fill(0).map((val, index) => {return {index: index, answer: 0}}))
 
     }
-  }, [questions])
+  }, [questions, responseOptions])
 
   const handleSubmit = () => {
     console.log(questionAnswers);
