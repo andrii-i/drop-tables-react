@@ -81,11 +81,11 @@ export default function TakingURESurvey() {
   }, [questions])
 
   const handleSubmit = () => {
-    console.log(questionAnswers);
-    axios.post(`http://127.0.0.1:5000/post_ure_response/${currentUser.multiFactor.user.email}`, null, 
-      {params: {
-        questionAnswers
-      }});
+    axios.post(`http://127.0.0.1:5000/post_ure_response`, 
+      {
+        answers: questionAnswers,
+        email: currentUser.multiFactor.user.email
+      });
   };
 
   return (
