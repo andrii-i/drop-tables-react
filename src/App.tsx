@@ -13,6 +13,7 @@ import TakeWorkSurvey from './TakeWorkSurvey';
 import OnetJobs from './OnetJobs'
 import TakingProfileSurvey from './TakingProfileSurvey';
 import ViewRecommendations from './ViewRecommendations';
+import ViewRecommendationsDesired from './ViewRecommendationsDesired';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path='/profiles' element={<TakingProfileSurvey />} />
               <Route path='/onet_jobs' element={<OnetJobs></OnetJobs>} />
               <Route path='/recommendations/:ResponseID' element={<ViewRecommendations />} />
+              <Route path='/recommendations_profile/:DesPID' element={<ViewRecommendationsDesired />} />
             </Route>            
           </Routes>
         </AuthProvider>

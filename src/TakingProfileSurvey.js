@@ -134,7 +134,7 @@ export default function TakingProfileSurvey() {
       email: currentUser.multiFactor.user.email,
       name: profileName
     });
-    navigate('/');
+    navigate('/surveys');
   };
 
   return (

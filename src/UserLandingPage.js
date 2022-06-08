@@ -73,14 +73,39 @@ function DisplaySurvey({survey}){
   )
 };
 
+function DisplayProfile({profile}){
+  console.log("this is profile", profile);
+  const ref = `/recommendations_profile/${profile.DesPID}`
+  return (
+    <List sx={{ width: '100%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <ArticleIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={profile.Name} sx={{ color: 'black' }} />
+        <Button variant='contained' href={ref} sx={{ backgroundColor: '#00966b'}}>
+          Job Recommendations
+        </Button>
+      </ListItem>
+    </List>
+    // <div>
+    //   hello
+    // </div>
+  )
+};
+
 export default function UserLandingPage() {
   const { currentUser } = useAuth();
   const [surveysTaken, setSurveys] = useState();
+  const [profiles, setProfiles] = useState();
 
   useEffect(() => {
     if(currentUser){
       console.log("Hi there " + currentUser.multiFactor.user.email);
       axios.get(`http://127.0.0.1:5000/get_response/${currentUser.multiFactor.user.email}`).then((data) => setSurveys(data.data));
+      axios.get(`http://127.0.0.1:5000/get_profile/${currentUser.multiFactor.user.email}`).then((data) => setProfiles(data.data));
     }
   }, [currentUser])
 
@@ -123,7 +148,7 @@ export default function UserLandingPage() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography sx={{ color: 'white', textAlign: 'left', ml: 4 }}>
-              This is where the desired profiles the user has created will be displayed
+              {profiles && profiles.map((profile) => <DisplayProfile profile={profile} />)}
             </Typography>
           </AccordionDetails>
         </Accordion>

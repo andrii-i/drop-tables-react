@@ -42,6 +42,16 @@ export default function SurveysPage() {
         </Typography>
       </Box>
       {surveys && surveys.map((survey) => <DisplaySurvey survey={survey}></DisplaySurvey>)}
+      <List sx={{ width: '80%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
+      <ListItemButton href={'/profiles'}>
+        <ListItemAvatar>
+          <Avatar>
+            <ArticleIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Job Preferences Profile" secondary="This survey asks you to fill out your preferences for various job characteristics." />
+      </ListItemButton>
+    </List>
     </Box>
   )
 }
