@@ -8,15 +8,29 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import { useAuth } from "./contexts/authContext";
-import { getAnswers, getQuestions } from "./profileQuestions"
+import { getAnswers, getQuestions } from "./profileQuestions";
+import { useNavigate } from "react-router-dom";
 
-function DisplayQuestionOption({questionOpt, setAnswers}){
-  console.log(questionOpt);
+
+function DisplayQuestionOption({questionOpt, setAnswers, setImportances}){
   const [value, setValue] = useState();
+  const [impValue, setImpValue] = useState();
+
   const handleChange = (event) => {
     setValue(event.target.value);
     setAnswers(prev => prev.map(x => {
+      if(x.index === questionOpt.Position-1){
+        return {...x, answer: parseInt(event.target.value)}
+      }
+      return x;
+    }))
+  };
+
+  const handleChange2 = (event) => {
+    setImpValue(event.target.value);
+    setImportances(prev => prev.map(x => {
       if(x.index === questionOpt.Position-1){
         return {...x, answer: parseInt(event.target.value)}
       }
@@ -28,11 +42,23 @@ function DisplayQuestionOption({questionOpt, setAnswers}){
     <Box sx={{ width: '60%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper', textAlign: 'left'}}>
       <FormControl sx={{ml: 5}}>
         <FormLabel id="radio-buttons-group" sx={{color: 'black', fontSize: '25px', mt: 2, mb: 2}}>{questionOpt.Position}. {questionOpt.Prompt}</FormLabel>
+        <FormLabel id="value" sx={{color: 'black', fontSize: '25px', mt: 2, mb: 2}}>Value:</FormLabel>
         <RadioGroup
           aria-labelledby="radio-buttons-group"
           name="controlled-radio-buttons-group"
           value={value ? value : 0}
           onChange={handleChange}
+          sx={{ mb: 5 }}
+        >
+          {questionOpt.responses.map(x => 
+            <FormControlLabel value={x.ResponseValue} control={<Radio />} label={x.ResponsePrompt} sx={{color: 'black', ml: 5}} />)}
+        </RadioGroup>
+        <FormLabel id="importance" sx={{color: 'black', fontSize: '25px', mt: 2, mb: 2}}>Importance:</FormLabel>
+        <RadioGroup
+          aria-labelledby="radio-buttons-group"
+          name="controlled-radio-buttons-group"
+          value={impValue ? impValue : 0}
+          onChange={handleChange2}
           sx={{ mb: 5 }}
         >
           {questionOpt.responses.map(x => 
@@ -48,7 +74,10 @@ export default function TakingProfileSurvey() {
   const [responseOptions, setOptions] = useState();
   const [questions, setQuestions] = useState();
   const [questionOptions, setQOptions] = useState();
-  const [questionAnswers, setAnswers] = useState()
+  const [questionAnswers, setAnswers] = useState();
+  const [questionImportances, setImportances] = useState();
+  const [profileName, setProfileName] = useState();
+  const navigate = useNavigate();
 
   // console.log(questionAnswers);
   useEffect(() => {
@@ -89,26 +118,41 @@ export default function TakingProfileSurvey() {
       setQOptions(questionResponses);
       let numQuestions = questions.length
       setAnswers(Array(numQuestions).fill(0).map((val, index) => {return {index: index, answer: 0}}))
-
+      setImportances(Array(numQuestions).fill(0).map((val, index) => {return {index: index, answer: 0}}))
     }
   }, [questions, responseOptions])
 
+  const handleChange = (event) => {
+    setProfileName(event.target.value);
+  };
+
   const handleSubmit = () => {
-    console.log(questionAnswers);
-    axios.post(`http://127.0.0.1:5000/post_ure_response/${currentUser.multiFactor.user.email}`, null, 
-      {params: {
-        questionAnswers
-      }});
+    axios.post(`http://127.0.0.1:5000/post_desired_profile`, 
+    {
+      answers: questionAnswers,
+      importances: questionImportances,
+      email: currentUser.multiFactor.user.email,
+      name: profileName
+    });
+    navigate('/');
   };
 
   return (
     <Box className='container-center-horizontal' sx={{minHeight: '100vh'}}>
       <NavBar />
       <div style={{color: "white"}}>
-        Profile Survey
-        {/* {questions && questions.map((response) => <div style={{color:"white"}}>Question {response.Prompt}</div>)}
-        {responseOptions && responseOptions.map((response) => <div style={{color:"white"}}>Response {response.ResponsePrompt}</div>)} */}
-        {questionOptions && questionOptions.map(x => <DisplayQuestionOption setAnswers={setAnswers} questionOpt={x}></DisplayQuestionOption>)}
+        Job Preferences Profile Survey
+        <Box sx={{ width: '60%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper', textAlign: 'left'}}>
+          <FormControl sx={{ml: 5}}>
+            <FormLabel id="radio-buttons-group" sx={{color: 'black', fontSize: '25px', mt: 2, mb: 2}}>Name of this Job Preferences Profile:</FormLabel>
+            <TextField
+                onChange={handleChange}
+                id="firstname"
+                sx={{ width: '50vh', ml: 12, mb: 3}}
+              />
+          </FormControl>
+        </Box>
+        {questionOptions && questionOptions.map(x => <DisplayQuestionOption setAnswers={setAnswers} setImportances={setImportances} questionOpt={x}></DisplayQuestionOption>)}
       </div>
       <Button
         variant='contained'
