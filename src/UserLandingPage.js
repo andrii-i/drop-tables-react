@@ -83,9 +83,11 @@ export default function UserLandingPage() {
         <Typography variant="h5" component="div" sx={{ color: 'white', textAlign: 'left' }}>
           ONet Job Matching
         </Typography>
-        <Typography variant="h5" component="div" sx={{ color: 'white', textAlign: 'left', mt: 3 }}>
-          ONet Job Search
-        </Typography>
+        <Link href='/onet_jobs' style={{ textDecoration: 'none' }}>
+          <Typography variant="h5" component="div" sx={{ color: 'white', textAlign: 'left', mt: 3 }}>
+            ONet Job Search
+          </Typography>
+        </Link>
         <Link href='/surveys' style={{ textDecoration: 'none' }}>
           <Typography variant="h5" component="div" sx={{ color: 'white', textAlign: 'left', mt: 3 }}>
             Take A Survey
