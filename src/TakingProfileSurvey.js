@@ -92,7 +92,7 @@ export default function TakingProfileSurvey() {
     <Box className='container-center-horizontal' sx={{minHeight: '100vh'}}>
       <NavBar />
       <div style={{color: "white"}}>
-        URE survey
+        Profile Survey
         {/* {questions && questions.map((response) => <div style={{color:"white"}}>Question {response.Prompt}</div>)}
         {responseOptions && responseOptions.map((response) => <div style={{color:"white"}}>Response {response.ResponsePrompt}</div>)} */}
         {questionOptions && questionOptions.map(x => <DisplayQuestionOption setAnswers={setAnswers} questionOpt={x}></DisplayQuestionOption>)}
