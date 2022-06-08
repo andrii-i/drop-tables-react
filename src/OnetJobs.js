@@ -8,8 +8,6 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import ArticleIcon from '@mui/icons-material/Article';
 
 function DisplayJob({job}){
   const ref = `https://www.onetonline.org/link/summary/${job.JobID}`
@@ -17,13 +15,10 @@ function DisplayJob({job}){
   return (
     <List sx={{ width: '80%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
       <ListItemButton href={ref}>
-        <ListItemAvatar>
-          <Avatar>
-            <ArticleIcon />
-          </Avatar>
+        <ListItemAvatar sx={{ mr: 3 }}>
+          <ListItemText secondary={job.JobID} sx={{ textAlign: 'center'}} /> 
         </ListItemAvatar>
         <ListItemText primary={job.Title} secondary={job.Description} /> 
-        <ListItemText secondary={job.JobID} /> 
       </ListItemButton>
     </List>
   )
