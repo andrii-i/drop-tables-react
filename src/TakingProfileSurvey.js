@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import { useAuth } from "./contexts/authContext";
+import { getAnswers, getQuestions } from "./profileQuestions"
 
 function DisplayQuestionOption({questionOpt, setAnswers}){
   const [value, setValue] = useState();
@@ -50,8 +51,16 @@ export default function TakingProfileSurvey() {
   const surveyId = 1;
   // console.log(questionAnswers);
   useEffect(() => {
-    axios.get(`http://127.0.0.1:5000/get_response_options/${surveyId}`).then((data) => setOptions(data.data));
-    axios.get(`http://127.0.0.1:5000/get_survey_questions/${surveyId}`).then((data) => setQuestions(data.data));
+    axios.get(`http://127.0.0.1:5000/get_response_options/${surveyId}`).then((data) => {
+      let numQuestions = data.length;
+      setQuestions(getQuestions())
+      //iterate through numQuestions
+      let qOptions = [];
+      for(let i = 0; i < numQuestions; i++){
+        qOptions = [...qOptions, ...getAnswers(i+1)];
+      }
+      setOptions(qOptions);
+  });
   }, [])
 
   useEffect(() => {
