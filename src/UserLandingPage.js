@@ -10,12 +10,13 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import { useAuth } from "./contexts/authContext";
 import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
+import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import ArticleIcon from '@mui/icons-material/Article';
 import axios from 'axios';
+import Button from '@mui/material/Button';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -48,19 +49,26 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
+const handleClick = () => {
+  console.log("hello");
+};
+
 function DisplaySurvey({survey}){
   console.log(survey);
-  // const ref = `/surveys/${survey.SurveyID}`
+  const ref = `/recommendations/${survey.SurveyResponseID}`
   return (
     <List sx={{ width: '100%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
-      <ListItemButton>
+      <ListItem>
         <ListItemAvatar>
           <Avatar>
             <ArticleIcon />
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary={survey.Name} secondary={survey.Category + ' - ' + survey.DateCompleted.split('00')[0]} sx={{ color: 'black' }} />
-      </ListItemButton>
+        <Button variant='contained' href={ref} sx={{ backgroundColor: '#00966b'}}>
+          Job Recommendations
+        </Button>
+      </ListItem>
     </List>
   )
 };

@@ -12,6 +12,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import TakeWorkSurvey from './TakeWorkSurvey';
 import OnetJobs from './OnetJobs'
 import TakingProfileSurvey from './TakingProfileSurvey';
+import ViewRecommendations from './ViewRecommendations';
 
 function App() {
   return (
@@ -27,12 +28,9 @@ function App() {
               <Route path='/surveys/2' element={<TakeWorkSurvey></TakeWorkSurvey>} />
               <Route path='/profiles' element={<TakingProfileSurvey />} />
               <Route path='/onet_jobs' element={<OnetJobs></OnetJobs>} />
-              {/* <Route path='/surveys/1' element={<TakingURESurvey />} /> */}
-            </Route>
-            
-
+              <Route path='/recommendations/:ResponseID' element={<ViewRecommendations />} />
+            </Route>            
           </Routes>
-
         </AuthProvider>
       </Router>
     </div>
