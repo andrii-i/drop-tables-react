@@ -88,9 +88,6 @@ export default function UserLandingPage() {
     <Box className='container-center-horizontal' sx={{minHeight: '100vh'}}>
       <NavBar />
       <Box sx={{ maxWidth: '80%', ml: 'auto', mr: 'auto', mt: 10 }}>
-        <Typography variant="h5" component="div" sx={{ color: 'white', textAlign: 'left' }}>
-          ONet Job Matching
-        </Typography>
         <Link href='/onet_jobs' style={{ textDecoration: 'none' }}>
           <Typography variant="h5" component="div" sx={{ color: 'white', textAlign: 'left', mt: 3 }}>
             ONet Job Search
