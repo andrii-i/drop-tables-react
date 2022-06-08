@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import { useAuth } from "./contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 function DisplayQuestionOption({questionOpt, setAnswers}){
   const [value, setValue] = useState();
@@ -38,7 +39,7 @@ function DisplayQuestionOption({questionOpt, setAnswers}){
         </RadioGroup>
       </FormControl>
     </Box>
-  )
+  );
 }
 
 export default function TakingURESurvey() {
@@ -46,13 +47,16 @@ export default function TakingURESurvey() {
   const [responseOptions, setOptions] = useState();
   const [questions, setQuestions] = useState();
   const [questionOptions, setQOptions] = useState();
-  const [questionAnswers, setAnswers] = useState()
+  const [questionAnswers, setAnswers] = useState();
+  const navigate = useNavigate();
   const surveyId = 1;
   // console.log(questionAnswers);
   useEffect(() => {
     axios.get(`http://127.0.0.1:5000/get_response_options/${surveyId}`).then((data) => setOptions(data.data));
     axios.get(`http://127.0.0.1:5000/get_survey_questions/${surveyId}`).then((data) => setQuestions(data.data));
-  }, [])
+  }, []);
+  // console.log(questionOptions);
+  // console.log(responseOptions);
 
   useEffect(() => {
     if(questions && responseOptions){
@@ -82,17 +86,18 @@ export default function TakingURESurvey() {
 
   const handleSubmit = () => {
     axios.post(`http://127.0.0.1:5000/post_ure_response`, 
-      {
-        answers: questionAnswers,
-        email: currentUser.multiFactor.user.email
-      });
+    {
+      answers: questionAnswers,
+      email: currentUser.multiFactor.user.email
+    });
+    navigate('/surveys');
   };
 
   return (
     <Box className='container-center-horizontal' sx={{minHeight: '100vh'}}>
       <NavBar />
       <div style={{color: "white"}}>
-        URE survey
+        URE Survey
         {/* {questions && questions.map((response) => <div style={{color:"white"}}>Question {response.Prompt}</div>)}
         {responseOptions && responseOptions.map((response) => <div style={{color:"white"}}>Response {response.ResponsePrompt}</div>)} */}
         {questionOptions && questionOptions.map(x => <DisplayQuestionOption setAnswers={setAnswers} questionOpt={x}></DisplayQuestionOption>)}

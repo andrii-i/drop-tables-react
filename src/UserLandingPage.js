@@ -77,7 +77,7 @@ export default function UserLandingPage() {
   }, [currentUser])
 
   return (
-    <Box className='container-center-horizontal' sx={{height: '100vh'}}>
+    <Box className='container-center-horizontal' sx={{minHeight: '100vh'}}>
       <NavBar />
       <Box sx={{ maxWidth: '80%', ml: 'auto', mr: 'auto', mt: 10 }}>
         <Typography variant="h5" component="div" sx={{ color: 'white', textAlign: 'left' }}>
@@ -106,7 +106,6 @@ export default function UserLandingPage() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography sx={{ color: 'white', textAlign: 'left', ml: 4 }}>
-              This is where the surveys the user has taken will be displayed
               {surveysTaken && surveysTaken.map((survey) => <DisplaySurvey survey={survey} />)}
             </Typography>
           </AccordionDetails>
