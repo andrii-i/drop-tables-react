@@ -22,7 +22,8 @@ function DisplayJob({job}){
             <ArticleIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={job.Title} secondary={job.Description} /> {job.JobID}
+        <ListItemText primary={job.Title} secondary={job.Description} /> 
+        <ListItemText secondary={job.JobID} /> 
       </ListItemButton>
     </List>
   )
