@@ -8,13 +8,14 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
+import { useAuth } from "./contexts/authContext";
 
 function DisplayQuestionOption({questionOpt, setAnswers}){
   const [value, setValue] = useState();
   const handleChange = (event) => {
     setValue(event.target.value);
     setAnswers(prev => prev.map(x => {
-      if(x.index == questionOpt.Position-1){
+      if(x.index === questionOpt.Position-1){
         return {...x, answer: parseInt(event.target.value)}
       }
       return x;
@@ -41,12 +42,13 @@ function DisplayQuestionOption({questionOpt, setAnswers}){
 }
 
 export default function TakingURESurvey() {
+  const { currentUser } = useAuth();
   const [responseOptions, setOptions] = useState();
   const [questions, setQuestions] = useState();
   const [questionOptions, setQOptions] = useState();
   const [questionAnswers, setAnswers] = useState()
   const surveyId = 1;
-  console.log(questionAnswers);
+  // console.log(questionAnswers);
   useEffect(() => {
     axios.get(`http://127.0.0.1:5000/get_response_options/${surveyId}`).then((data) => setOptions(data.data));
     axios.get(`http://127.0.0.1:5000/get_survey_questions/${surveyId}`).then((data) => setQuestions(data.data));
@@ -77,6 +79,15 @@ export default function TakingURESurvey() {
 
     }
   }, [questions])
+
+  const handleSubmit = () => {
+    console.log(questionAnswers);
+    axios.post(`http://127.0.0.1:5000/post_ure_response/${currentUser.multiFactor.user.email}`, null, 
+      {params: {
+        questionAnswers
+      }});
+  };
+
   return (
     <Box className='container-center-horizontal' sx={{minHeight: '100vh'}}>
       <NavBar />
@@ -88,7 +99,7 @@ export default function TakingURESurvey() {
       </div>
       <Button
         variant='contained'
-        // onClick={handleSubmit}
+        onClick={handleSubmit}
         sx={{ mt: 5, backgroundColor: '#00966b', fontWeight: 'bold' }}
       >
         Submit Survey
