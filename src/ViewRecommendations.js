@@ -16,7 +16,7 @@ function DisplayJob({job}){
     <List sx={{ width: '80%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
       <ListItemButton href={ref}>
         <ListItemAvatar sx={{ mr: 3 }}>
-          <ListItemText secondary={job.JobID} sx={{ textAlign: 'center'}} /> 
+          <ListItemText secondary={job.Score} sx={{ textAlign: 'center'}} /> 
         </ListItemAvatar>
         <ListItemText primary={job.Title} secondary={job.Description} /> 
       </ListItemButton>
