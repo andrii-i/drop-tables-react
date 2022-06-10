@@ -1,16 +1,26 @@
 # DROP TABLES, REACT-BASED QUESTIONNAIRE PROJECT (USER SIDE). LOGIN/ACCOUNT SYSTEM CONCENTRATION
 
-## How to contribute 
+## How to contribute
 
 - React application is continiously built and deployed from "main" branch to https://drop-tables.netlify.app/
 - Please create a feature to work on in a separate branch, then create a PR to merge it into main when done. Please make sure to test your build before merging
 
 ## UIUX
 
-- Project wireframes (WIP) are available at https://www.figma.com/file/6bo2mtuE5aGG1wnltiSPkh/DROP-TABLES-(USER-SIDE)?node-id=0%3A1 
+- Project wireframes (WIP) are available at https://www.figma.com/file/6bo2mtuE5aGG1wnltiSPkh/DROP-TABLES-(USER-SIDE)?node-id=0%3A1
 - Material UI Design Kit is available at https://www.figma.com/file/d3B0iz72GWjlalHpnVVolL/Material-Design-UI-kit---Components-library-(Community)?node-id=0%3A13759; use UI elements from the kit to contribute to the Wireframes
 
 # BOILERPALTE:
+
+## Preflight Steps:
+
+* Be logged into the Cal Poly VPN
+* Have a google account
+
+## To Launch App
+
+1. Use **npm start** to launch frontend
+2. On a seperate terminal, Use **flask run** to launch backend
 
 ## Getting Started with Create React App
 
@@ -22,23 +32,23 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
+The page will reload if you make edits.
 You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
+Launches the test runner in the interactive watch mode.
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
