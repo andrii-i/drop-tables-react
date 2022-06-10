@@ -50,17 +50,12 @@ export default function TakingURESurvey() {
   const [questionAnswers, setAnswers] = useState();
   const navigate = useNavigate();
   const surveyId = 1;
-  // console.log(questionAnswers);
   useEffect(() => {
     axios.get(`http://127.0.0.1:5000/get_response_options/${surveyId}`).then((data) => setOptions(data.data));
     axios.get(`http://127.0.0.1:5000/get_survey_questions/${surveyId}`).then((data) => setQuestions(data.data));
   }, []);
-  // console.log(questionOptions);
-  // console.log(responseOptions);
-
   useEffect(() => {
     if(questions && responseOptions){
-      // let temp = [... new Set(questions.map(x => x.Position))]
       let questionResponses = []
       let lastPosition = 1;
       for (var i = 0; i < questions.length; i++) {
@@ -98,8 +93,6 @@ export default function TakingURESurvey() {
       <NavBar />
       <div style={{color: "white"}}>
         URE Survey
-        {/* {questions && questions.map((response) => <div style={{color:"white"}}>Question {response.Prompt}</div>)}
-        {responseOptions && responseOptions.map((response) => <div style={{color:"white"}}>Response {response.ResponsePrompt}</div>)} */}
         {questionOptions && questionOptions.map(x => <DisplayQuestionOption setAnswers={setAnswers} questionOpt={x}></DisplayQuestionOption>)}
       </div>
       <Button

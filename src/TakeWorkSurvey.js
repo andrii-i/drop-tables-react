@@ -63,14 +63,10 @@ export default function TakeWorkSurvey() {
     axios.get(`http://127.0.0.1:5000/get_survey_questions/${surveyId}`).then((data) => setQuestions(data.data));
     axios.get(`http://127.0.0.1:5000/get_response_options/1`).then((data) => setOptions2(data.data));
   }, []);
-  // console.log(questionOptions);
-  // console.log(responseOptions);
 
   useEffect(() => {
     if(questions && responseOptions){
-      // let temp = [... new Set(questions.map(x => x.Position))]
       let questionResponses = []
-      // let lastPosition = 1;
       for (var i = 0; i < questions.length; i++) {
         let question = questions[i];
         let responses = responseOptions.filter((x) => x.Position === question.Position);
@@ -90,7 +86,6 @@ export default function TakeWorkSurvey() {
   }, [questions]);
 
   const handleSubmit = () => {
-    // console.log(questionAnswers);
     axios.post(`http://127.0.0.1:5000/post_work_response`, 
     {
       answers: questionAnswers,
@@ -104,8 +99,6 @@ export default function TakeWorkSurvey() {
       <NavBar />
       <div style={{color: "white"}}>
         Work Experience Survey
-        {/* {questions && questions.map((response) => <div style={{color:"white"}}>Question - {response.Prompt}</div>)}
-      {responseOptions && responseOptions.map((response) => <div style={{color:"white"}}>Response - {response.ResponsePrompt}</div>)} */}
       {questionOptions && questionOptions.map(x => <DisplayQuestionOption setAnswers={setAnswers} questionOpt={x}></DisplayQuestionOption>)}
       </div>
       <Button

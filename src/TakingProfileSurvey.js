@@ -79,26 +79,22 @@ export default function TakingProfileSurvey() {
   const [profileName, setProfileName] = useState();
   const navigate = useNavigate();
 
-  // console.log(questionAnswers);
   useEffect(() => {
     setQuestions(getQuestions());
   }, []);
 
   useEffect(() => {
     if (questions) {
-      // console.log(questions);
       let qOptions = [];
       for(let i = 0; i < questions.length; i++){
         qOptions = [...qOptions, ...getAnswers(i+1)];
       }
-      // console.log(qOptions);
       setOptions(qOptions);
     }
   }, [questions])
 
   useEffect(() => {
     if(questions && responseOptions){
-      // let temp = [... new Set(questions.map(x => x.Position))]
       let questionResponses = []
       let lastPosition = 1;
       for (var i = 0; i < questions.length; i++) {

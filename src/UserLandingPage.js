@@ -90,9 +90,6 @@ function DisplayProfile({profile}){
         </Button>
       </ListItem>
     </List>
-    // <div>
-    //   hello
-    // </div>
   )
 };
 

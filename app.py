@@ -38,7 +38,6 @@ def get_user(email, name):
             sql = f"SELECT COUNT(DISTINCT AccountID) as NumUsers FROM Users"
             cursor.execute(sql)
             id = cursor.fetchone()['NumUsers']
-            # print(id)
         with connection.cursor() as cursor:
             sql = "INSERT INTO Users VALUES (%s, %s, %s, 'user')"
             print(id, type(id))
@@ -140,32 +139,6 @@ def get_survey_questions(id):
             cursor.execute(sql, (id))
             result = cursor.fetchall()
     return jsonify(result)
-
-# @app.route("/post_ure_response/<email>")
-# @cross_origin(supports_credentials=True)
-# def post_ure_response(email):
-#     print(email)
-#     surveyID = 1
-#     category = 'URE'
-#     dateCompleted = date.today()
-#     connection = pymysql.connect(
-#                 host='mysql.labthreesixfive.com',
-#                 user='group3a',
-#                 password='b[=+>M8jjB3zp43?',
-#                 database='group3a',
-#                 cursorclass=pymysql.cursors.DictCursor)
-#     with connection:
-#         with connection.cursor() as cursor:
-#             sql = "SELECT COUNT(DISTINCT SurveyResponseID) as Total FROM SurveyResponses"
-#             cursor.execute(sql)
-#             surveyResponseID = cursor.fetchone()['Total']
-#         with connection.cursor() as cursor:
-#             sql = "SELECT AccountID FROM Users WHERE Email = %s"
-#             cursor.execute(sql, (email))
-#             userID = cursor.fetchone()
-#             print(userID)
-#     # return jsonify(result)
-#     return 'Hi'
 
 @app.route('/post_ure_response', methods = ['POST'])
 @cross_origin(supports_credentials=True)
