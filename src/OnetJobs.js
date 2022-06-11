@@ -12,7 +12,7 @@ function DisplayJob({job}){
   const ref = `https://www.onetonline.org/link/summary/${job.JobID}`
   console.log(ref);
   return (
-    <List sx={{ width: '80%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
+    <List sx={{ width: '100%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
       <ListItemButton href={ref}>
         <ListItemAvatar sx={{ mr: 3 }}>
           <ListItemText secondary={job.JobID} sx={{ textAlign: 'center'}} /> 
@@ -32,12 +32,12 @@ export default function OnetJobs() {
   return (
     <Box className='container-center-horizontal'>
       <NavBar />
-      <Box sx={{ maxWidth: '80%', ml: 'auto', mr: 'auto', mt: 10 }}>
+      <Box sx={{ maxWidth: '80%', ml: 'auto', mr: 'auto', mt: 10, minHeight: '100vh'}}>
         <Typography variant="h5" component="div" sx={{ color: 'white', textAlign: 'left' }}>
           Onet Jobs
         </Typography>
+        {jobs && jobs.map((job) => <DisplayJob job={job}></DisplayJob>)}
       </Box>
-      {jobs && jobs.map((job) => <DisplayJob job={job}></DisplayJob>)}
     </Box>
   )
 }

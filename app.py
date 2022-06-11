@@ -31,7 +31,6 @@ def get_user(email, name):
             sql = "select * from Users where Email = %s"
             cursor.execute(sql, (email))
             result = cursor.fetchone()
-            print(result)
             if result:
                 return jsonify(result)
         with connection.cursor() as cursor:
@@ -40,7 +39,6 @@ def get_user(email, name):
             id = cursor.fetchone()['NumUsers']
         with connection.cursor() as cursor:
             sql = "INSERT INTO Users VALUES (%s, %s, %s, 'user')"
-            print(id, type(id))
             cursor.execute(sql, (id, name, email))
         connection.commit()
         return 'User inserted into database'
@@ -61,7 +59,6 @@ def get_surveys():
             sql = "SELECT * FROM Surveys"
             cursor.execute(sql)
             result = cursor.fetchall()
-            print(result)
             return jsonify(result)
             
 @app.route("/get_response/<email>")
@@ -75,7 +72,6 @@ def get_response(email):
                 cursorclass=pymysql.cursors.DictCursor)
     with connection:
         with connection.cursor() as cursor:
-            print("hi")
             sql = """select * from 
                     Users u Join SurveyResponses s ON 
                     u.AccountId = s.UserId
@@ -96,7 +92,6 @@ def get_profile(email):
                 cursorclass=pymysql.cursors.DictCursor)
     with connection:
         with connection.cursor() as cursor:
-            print("hi")
             sql = """select DesPID, d.Name, UserID from 
                     Users u Join DesiredProfiles d ON 
                     u.AccountId = d.UserId
@@ -109,7 +104,6 @@ def get_profile(email):
 @app.route("/get_response_options/<id>")
 @cross_origin(supports_credentials=True)
 def get_response_options(id):
-    print(id)
     connection = pymysql.connect(
                 host='mysql.labthreesixfive.com',
                 user='group3a',
@@ -126,7 +120,6 @@ def get_response_options(id):
 @app.route("/get_survey_questions/<id>")
 @cross_origin(supports_credentials=True)
 def get_survey_questions(id):
-    print(id)
     connection = pymysql.connect(
                 host='mysql.labthreesixfive.com',
                 user='group3a',
@@ -147,7 +140,6 @@ def post_ure_response():
         response = request.get_json()
         answers = response["answers"]
         email = response["email"]
-        print(answers, email)
         surveyID = 1
         category = 'URE'
         dateCompleted = date.today()
@@ -166,12 +158,10 @@ def post_ure_response():
                 sql = "SELECT AccountID FROM Users WHERE Email = %s"
                 cursor.execute(sql, (email))
                 userID = cursor.fetchone()["AccountID"]
-                print(surveyResponseID, surveyID, dateCompleted, category, userID)
             #Survey Responses
             with connection.cursor() as cursor:
                 try:
                     sql = "INSERT INTO SurveyResponses VALUES (%s, %s, %s, %s, %s)"
-                    print(sql)
                     cursor.execute(sql, (surveyResponseID, surveyID, dateCompleted, category, userID))
                 except:
                     pass
@@ -194,7 +184,6 @@ def post_work_response():
         response = request.get_json()
         answers = response["answers"]
         email = response["email"]
-        print(answers, email)
         surveyID = 2
         category = 'Work'
         dateCompleted = date.today()
@@ -213,12 +202,10 @@ def post_work_response():
                 sql = "SELECT AccountID FROM Users WHERE Email = %s"
                 cursor.execute(sql, (email))
                 userID = cursor.fetchone()["AccountID"]
-                print(surveyResponseID, surveyID, dateCompleted, category, userID)
             #Survey Responses
             with connection.cursor() as cursor:
                 try:
                     sql = "INSERT INTO SurveyResponses VALUES (%s, %s, %s, %s, %s)"
-                    print(sql)
                     cursor.execute(sql, (surveyResponseID, surveyID, dateCompleted, category, userID))
                 except:
                     pass
@@ -249,7 +236,6 @@ def get_onet_jobs():
             sql = "SELECT * FROM ONetJobs"
             cursor.execute(sql)
             result = cursor.fetchall()
-            # print(result)
     return jsonify(result)
 
 # @app.route("/get_onet_jobs/<ExpPID>")
@@ -274,7 +260,6 @@ def get_mappings(ExpPID):
                 """
             cursor.execute(sql, (ExpPID))
             result = cursor.fetchall()
-            # print(result)
 
         with connection.cursor() as cursor:
             for index, item in enumerate(result):
@@ -283,7 +268,6 @@ def get_mappings(ExpPID):
                 if characteristic is None:
                     continue
                 sql = "INSERT INTO SurveyScores VALUES (%s, %s, %s)"
-                # print(sql)
                 cursor.execute(sql, (ExpPID, characteristic, score,))
         connection.commit()
 
@@ -302,7 +286,6 @@ def get_mappings(ExpPID):
                 """
             cursor.execute(sql, (ExpPID))
             result = cursor.fetchall()
-            # print(result)
 
         with connection.cursor() as cursor:
             sql = "INSERT INTO ExpProfiles VALUES (%s, %s)"
@@ -344,7 +327,6 @@ def get_desired_mapping(DesPID):
                 """
             cursor.execute(sql, (DesPID))
             result = cursor.fetchall()
-            print(result)
 
         with connection.cursor() as cursor:
             for index, item in enumerate(result):
@@ -358,7 +340,6 @@ def get_desired_mapping(DesPID):
 @app.route("/get_desired_recommendations/<id>")
 @cross_origin(supports_credentials=True)
 def get_desired_recommendations(id):
-    print(id)
     connection = pymysql.connect(
                     host='mysql.labthreesixfive.com',
                     user='group3a',
@@ -377,13 +358,11 @@ def get_desired_recommendations(id):
                 """
             cursor.execute(sql, (id))
             result = cursor.fetchall()
-            print(result)
     return jsonify(result)
 
 @app.route("/get_recommendations/<id>")
 @cross_origin(supports_credentials=True)
 def get_recommendations(id):
-    print(id)
     connection = pymysql.connect(
                     host='mysql.labthreesixfive.com',
                     user='group3a',
@@ -399,16 +378,15 @@ def get_recommendations(id):
                     inner join ONetProfiles o on o.ONetPID = e.ONetPID
                     inner join ONetJobs j on j.JobID = o.ONetJobID
                     where e.ExpPID=%s
+                    order by Score desc
                 """
             cursor.execute(sql, (id))
             result = cursor.fetchall()
-            print(result)
     return jsonify(result)
 
 @app.route("/get_recommendations_profile/<id>")
 @cross_origin(supports_credentials=True)
 def get_recommendations_profile(id):
-    print(id)
     connection = pymysql.connect(
                     host='mysql.labthreesixfive.com',
                     user='group3a',
@@ -424,10 +402,10 @@ def get_recommendations_profile(id):
                     inner join ONetProfiles o on o.ONetPID = d.ONetPID
                     inner join ONetJobs j on j.JobID = o.ONetJobID
                     where d.DesPID=%s
+                    order by Score desc
                 """
             cursor.execute(sql, (id))
             result = cursor.fetchall()
-            print(result)
     return jsonify(result)
 
 @app.route('/post_desired_profile', methods = ['POST'])
@@ -454,8 +432,6 @@ def post_desired_profile():
                 sql = "SELECT AccountID FROM Users WHERE Email = %s"
                 cursor.execute(sql, (email))
                 userID = cursor.fetchone()["AccountID"]
-                # print(desPID, profileName, userID)
-                # print(answers, importances)
             with connection.cursor() as cursor:
                 sql = "INSERT INTO DesiredProfiles VALUES (%s, %s, %s)"
                 cursor.execute(sql, (desPID, profileName, userID))
@@ -464,7 +440,6 @@ def post_desired_profile():
                 sql = "SELECT Characteristic FROM MultipleChoiceQuestions WHERE Characteristic is NOT NULL GROUP BY Characteristic;"
                 cursor.execute(sql)
                 characteristics = cursor.fetchall()
-                # print(characteristics)
             with connection.cursor() as cursor:
                 for item in zip(answers, importances, characteristics):
                     value = item[0]['answer']
