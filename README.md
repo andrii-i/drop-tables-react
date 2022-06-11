@@ -19,7 +19,7 @@
 
 ## To Launch App
 
-1. Use **npm start** to launch frontend
+1. Use **npm start** or **yarn start** to launch frontend
 2. On a seperate terminal, Use **flask run** to launch backend
 
 ## Getting Started with Create React App

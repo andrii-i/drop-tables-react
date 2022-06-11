@@ -77,7 +77,7 @@ export default function TakingURESurvey() {
       setAnswers(Array(numQuestions).fill(0).map((val, index) => {return {index: index, answer: 0}}))
 
     }
-  }, [questions])
+  }, [questions, responseOptions])
 
   const handleSubmit = () => {
     axios.post(`http://127.0.0.1:5000/post_ure_response`, 

@@ -42,28 +42,34 @@ function DisplayQuestionOption({questionOpt, setAnswers, setImportances}){
     <Box sx={{ width: '60%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper', textAlign: 'left'}}>
       <FormControl sx={{ml: 5}}>
         <FormLabel id="radio-buttons-group" sx={{color: 'black', fontSize: '25px', mt: 2, mb: 2}}>{questionOpt.Position}. {questionOpt.Prompt}</FormLabel>
-        <FormLabel id="value" sx={{color: 'black', fontSize: '25px', mt: 2, mb: 2}}>Value:</FormLabel>
-        <RadioGroup
-          aria-labelledby="radio-buttons-group"
-          name="controlled-radio-buttons-group"
-          value={value ? value : 0}
-          onChange={handleChange}
-          sx={{ mb: 5 }}
-        >
-          {questionOpt.responses.map(x => 
-            <FormControlLabel value={x.ResponseValue} control={<Radio />} label={x.ResponsePrompt} sx={{color: 'black', ml: 5}} />)}
-        </RadioGroup>
-        <FormLabel id="importance" sx={{color: 'black', fontSize: '25px', mt: 2, mb: 2}}>Importance:</FormLabel>
-        <RadioGroup
-          aria-labelledby="radio-buttons-group"
-          name="controlled-radio-buttons-group"
-          value={impValue ? impValue : 0}
-          onChange={handleChange2}
-          sx={{ mb: 5 }}
-        >
-          {questionOpt.responses.map(x => 
-            <FormControlLabel value={x.ResponseValue} control={<Radio />} label={x.ResponsePrompt} sx={{color: 'black', ml: 5}} />)}
-        </RadioGroup>
+        <Box sx={{ display: 'flex', flexDirection: 'row'}}>
+          <Box sx={{ ml: 'auto', mr: 'auto'}}>
+            <FormLabel id="value" sx={{color: 'black', fontSize: '25px', mt: 2, mb: 2}}>Value:</FormLabel>
+            <RadioGroup
+              aria-labelledby="radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={value ? value : 0}
+              onChange={handleChange}
+              sx={{ mb: 5 }}
+            >
+              {questionOpt.responses.map(x => 
+                <FormControlLabel value={x.ResponseValue} control={<Radio />} label={x.ResponsePrompt} sx={{color: 'black', ml: 5}} />)}
+            </RadioGroup>
+          </Box>
+          <Box sx={{ mr: 'auto' }}>
+            <FormLabel id="importance" sx={{color: 'black', fontSize: '25px', mt: 2, mb: 2}}>Importance:</FormLabel>
+            <RadioGroup
+              aria-labelledby="radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={impValue ? impValue : 0}
+              onChange={handleChange2}
+              sx={{ mb: 5 }}
+            >
+              {questionOpt.responses.map(x => 
+                <FormControlLabel value={x.ResponseValue} control={<Radio />} label={x.ResponsePrompt} sx={{color: 'black', ml: 5}} />)}
+            </RadioGroup>
+          </Box>
+        </Box>
       </FormControl>
     </Box>
   )
@@ -96,20 +102,12 @@ export default function TakingProfileSurvey() {
   useEffect(() => {
     if(questions && responseOptions){
       let questionResponses = []
-      let lastPosition = 1;
       for (var i = 0; i < questions.length; i++) {
         let question = questions[i];
         let responses = responseOptions.filter((x) => x.Position === question.Position);
-        if(responses.length === 0){
-          responses = responseOptions.filter((x) => x.Position === lastPosition);
-        }
-        else{
-          lastPosition = question.Position;
-        }
         questionResponses.push({
           ...question, responses: responses
         });
-        
       }
       setQOptions(questionResponses);
       let numQuestions = questions.length

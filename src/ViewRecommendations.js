@@ -11,14 +11,19 @@ import Typography from '@mui/material/Typography';
 
 function DisplayJob({job}){
   const ref = `https://www.onetonline.org/link/summary/${job.JobID}`
-  console.log(ref);
+  let percentage = (job.Score * 100).toFixed(2);
+  let displayPercentage = `${percentage}%`
   return (
     <List sx={{ width: '80%', ml: 'auto', mr: 'auto', mt: 2, bgcolor: 'background.paper' }}>
       <ListItemButton href={ref}>
         <ListItemAvatar sx={{ mr: 3 }}>
-          <ListItemText secondary={job.Score} sx={{ textAlign: 'center'}} /> 
+          <ListItemText primary={displayPercentage} sx={{ textAlign: 'center', color: '#00966b'}} /> 
+          <ListItemText secondary={<Typography style={{ color: '#00966b', fontSize: '15px' }}>match</Typography>} sx={{ textAlign: 'center', mr: 1 }} /> 
         </ListItemAvatar>
         <ListItemText primary={job.Title} secondary={job.Description} /> 
+        <ListItemAvatar sx={{ ml: 3 }}>
+          <ListItemText secondary={job.JobID} sx={{ textAlign: 'left'}} /> 
+        </ListItemAvatar>
       </ListItemButton>
     </List>
   )

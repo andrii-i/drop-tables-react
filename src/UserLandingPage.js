@@ -49,10 +49,6 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
-const handleClick = () => {
-  console.log("hello");
-};
-
 function DisplaySurvey({survey}){
   console.log(survey);
   const ref = `/recommendations/${survey.SurveyResponseID}`
